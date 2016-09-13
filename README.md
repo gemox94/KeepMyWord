@@ -7,7 +7,6 @@ Basically this is going to work like a dictionary, a personal one, where you can
 With this project you will be able to save words with its meaning, as we mentioned before, but there will be also some other features like saving grammar rules and a notebook.
 To save your words, you have to sign up.
 </p>
-<br>
 <p>
 The site will be responsive so you can access to your words in your mobile device.
 </p>
