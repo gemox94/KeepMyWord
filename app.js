@@ -6,6 +6,8 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
+const session = require('express-session');
+const passport = require('passport');
 
 const routes = require('./routes/index');
 const users = require('./routes/users');
@@ -24,6 +26,28 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Express session
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true
+}));
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// Makes the user object global in all views
+app.get('*', (req, res, next) => {
+  res.locals.user = req.user || null;
+  if(req.user){
+    res.locals.type = req.user.type;
+  };
+  next();
+});
+
 
 app.use('/', routes);
 app.use('/users', users);

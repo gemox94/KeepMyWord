@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "keepmword",
+    "password": "",
+    "database": "keepmword",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "keepmword",
+    "password": "",
+    "database": "keepmword",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "keepmword",
+    "password": "",
+    "database": "keepmword",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
