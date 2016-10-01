@@ -1,7 +1,16 @@
 <div class="container">
+
+  {{#if errors}}
+    <div class="alert alert-danger">
+      {{#each errors}}
+        <li>{{this.msg}}</li>
+      {{/each}}
+    </div>
+  {{/if}}
+
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <form action="/users/signup" method="post">
+      <form action="/users/signup" method="post" novalidate="novalidate">
 
         <div class="form-group">
           <label for="name">Name</label>

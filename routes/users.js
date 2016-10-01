@@ -1,6 +1,7 @@
+'use strict';
 const express   = require('express');
 const models    = require('../models');
-const bcrypt    = require('bcrypt');
+const bcrypt    = require('bcryptjs');
 const passport  = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const router    = express.Router();
@@ -11,20 +12,30 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/signup', (req, res) => {
-  const saltRounds = 10;
-  bcrypt.genSalt(saltRounds, (err, salt) => {
-    bcrypt.hash(req.body.password, salt, (err, hash) => {
-        models.User.create({
-          name: req.body.name,
-          lastname: req.body.lastname,
-          username: req.body.username,
-          email: req.body.email,
-          password: hash
-        }).then(() => {
-          res.redirect('/login');
-        });
+
+
+  req.checkBody('email', 'Must be a valid email').isEmail();
+
+  let errors = req.validationErrors();
+  if (errors) {
+    res.render('auth/signup', {errors: errors});
+  }
+  else{
+    const saltRounds = 10;
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+      bcrypt.hash(req.body.password, salt, (err, hash) => {
+          models.User.create({
+            name: req.body.name,
+            lastname: req.body.lastname,
+            username: req.body.username,
+            email: req.body.email,
+            password: hash
+          }).then(() => {
+            res.redirect('/login');
+          });
+      });
     });
-  });
+  }
 });
 
 passport.serializeUser((user, done) => {

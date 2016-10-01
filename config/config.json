@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "keepmword",
+    "username": "root",
     "password": "",
     "database": "keepmword",
     "host": "127.0.0.1",
